@@ -5,3 +5,4 @@
 系列文章分为如下几个方面：
 
 1.[Netty基础杂谈](./nettyBase.md)
+2.[Netty服务器启动](./nettyBind.md)
