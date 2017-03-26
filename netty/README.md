@@ -5,6 +5,9 @@
 系列文章分为如下几个方面：
 
 1.[Netty基础杂谈](./nettyBase.md)
+
 2.[Netty服务器启动](./nettyBind.md)
+
 3.[Netty中的Boss和Worker](./bossAndWorker.md)
+
 4.[pipeline,channel和handler](./channelHandler.md)

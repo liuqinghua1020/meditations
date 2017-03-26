@@ -9,4 +9,6 @@
     - [Netty客户端连接](netty/nettyConnection.md)
     - [Netty写](netty/nettyWrite.md)
     - [Netty读](netty/nettyRead.md)
+    - [Netty中的Boss和Worker](netty/bossAndWorker.md)
+    - [pipeline,channel和handler](netty/channelHandler.md)
 
