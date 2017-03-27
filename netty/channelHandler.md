@@ -246,7 +246,7 @@ Sink具体指的是ChannelSink及其一系列子类，在ChannelSink的源码注
 
 ChannelEvent是Netty中的事件机制，主要是在pipeline中流转，不同的handler如果碰到自己感兴趣的Event，则进行处理，然后传递给下一个handler。
 
-主要是读写的Event和Channel状态改变的Event，以及一些异常Channel，这里不再对这里Event分类说明。
+主要是读写的Event和Channel状态改变的Event，以及一些异常Event，这里不再对这里Event分类说明。
 
 
 
