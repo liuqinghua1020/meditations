@@ -144,7 +144,7 @@ NioClientBoss的process方法源码如下
             ch.worker.register(ch, ch.connectFuture);
         }
 
-由于socket的connect方法是有用户线程显示调用的，所以这里的逻辑主要是判断该channel是否完成了socket连接的握手操作，即ch.channel.finishConnect()方法，如果完成连接，则将该channel打包成worker的RegisterTask，又将任务抛给 Worker进程处理。
+由于socket的connect方法是由用户线程显式调用的，所以这里的逻辑主要是判断该channel是否完成了socket连接的握手操作，即ch.channel.finishConnect()方法，如果完成连接，则将该channel打包成worker的RegisterTask，又将任务抛给 Worker进程处理。
 
 processConnectTimeout主要处理连接超时的情况，这里暂且不论。
 
