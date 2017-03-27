@@ -1,6 +1,6 @@
 #Netty服务器启动
 
-    本文主要以netty-3.10的 org.jboss.netty.example.echo.EchoServer 的代码来分析netty NIO 服务端的启动流程。
+本文主要以netty-3.10的 org.jboss.netty.example.echo.EchoServer 的代码来分析netty NIO 服务端的启动流程。
 
 ##EchoServer源码
 EchoServer只要一个main启动方法，以下是其核心代码：

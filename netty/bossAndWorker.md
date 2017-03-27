@@ -1,22 +1,22 @@
 #Netty中的Boss和Worker
 
-    Netty中服务端／客户端在启动的时候会专门启动两类线程（netty-3.10的Echo例子中是这样子，但是到netty 4.x之后 客户端只其起了一个线程）: Boss线程和Worker线程。在服务端，Boss线程主要负责处理连接上来的请求，然后讲该连接分发给Worker来处理网络读写；在客户端，Boss线程主要负责处理连接服务器，然后讲连接分发给Worker来处理网络读写。Boss和Worker主要来自于Reactor模式。
+Netty中服务端／客户端在启动的时候会专门启动两类线程（netty-3.10的Echo例子中是这样子，但是到netty 4.x之后 客户端只其起了一个线程）: Boss线程和Worker线程。在服务端，Boss线程主要负责处理连接上来的请求，然后讲该连接分发给Worker来处理网络读写；在客户端，Boss线程主要负责处理连接服务器，然后讲连接分发给Worker来处理网络读写。Boss和Worker主要来自于Reactor模式。
 
 ##Reactor模式
 
 一张图说明Reactor的整体架构。
 
-![Reactor模式](./Reactor.png)
+![Reactor模式](./pic/Reactor.png)
 
 关于reactor模式，请自行百度。这里说下我的理解：在Netty中，Boss线程相当于acceptor，而Worker则主要是负责read和send。
 
 在Netty服务端启动后，其后台线程如下图所示，
-![netty服务端](./nettyServer.png)
+![netty服务端](./pic/nettyServer.png)
 
 从图中可以看出，除了用户线程（main),还有一个Boss线程和N个Worker线程(缺省情况下N=16)
 
 在Netty客户端启动后，其后台线程如下图所示，
-![netty客户端](./nettyClient.png)
+![netty客户端](./pic/nettyClient.png)
 
 从图中可以看出，除了用户线程（main),还有一个Boss线程和N个Worker线程(缺省情况下N=16)
 
@@ -73,7 +73,7 @@
 
 * processTaskQueue主要是从 taskQueue 任务队列中获取任务，然后执行。taskQueue任务队列是 AbstractNioSelector 的属性，所以每一个Boss线程和Worker线程都会有一个自己的taskQueue,只要调用相关的方法将task投到队列中，Boss线程和Worker线程 就能在 每一次 循环中 处理这些任务。processTaskQueue方法的主体框架是一样的，不同的是NioServerBoss，NioClientBoss和NioWorker中定义的RegisterTask 任务类，在下面分别说明各个类的时候再对其做简单描述吧。
 
-* process(selector) 主要是处理多路复用器Selector，NioServerBoss，NioClientBoss和NioWorker的处理逻辑个不相同，在下面分别说明各个类的时候再对其做简单描述吧。
+* process(selector) 主要是处理多路复用器Selector，NioServerBoss，NioClientBoss和NioWorker的处理逻辑各不相同，在下面分别说明各个类的时候再对其做简单描述吧。
 
 
 ##NioServerBoss
