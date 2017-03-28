@@ -12,10 +12,15 @@ java中有很多channel，包括文件的channel（FileChannel），网络的cha
 ##Selector机制
 多路复用器Selector，是java NIO编程的基础，其名称估计是来自于Unix／Linux的select()，但实际底层代码采用的是epoll().一个网络读写Channel会在Selector上注册其所感兴趣的事件。
 目前Selector所支持的事件有：
+
 1.SelectionKey.OP_ACCEPT  接受一个连接
+
 2.SelectionKey.OP_CONNECT 发起一个连接
+
 3.SelectionKey.OP_READ    有读事件
+
 4.SelectionKey.OP_WRITE  有写事件
+
 从字面意思可以看出，Selector主要关注的还是网络读写。
 
 Selector 会不断地轮询注册在其上的所有Channel，如果某一个Channel上有新的事件，则此Channel会处于就绪状态，被Selector轮询出来，交由用户进程来处理。一个多路复用器可以同时注册多个Channel，并且对他们进行轮询。
