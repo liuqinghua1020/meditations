@@ -63,6 +63,71 @@ Netty中服务端／客户端在启动的时候会专门启动两类线程（net
 
     selector.select();
 为阻塞的select()方法，这也和是服务端有关。
+有一点需要注意的是，selector.select() 本身为阻塞方法，即如下例子
+    
+    Selector selector = Selector.open();  
+    ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();  
+    serverSocketChannel.configureBlocking(false);  
+    serverSocketChannel.socket().bind(new InetSocketAddress(1234));  
+    serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);  
+    
+    for(;;){
+        System.out.println("轮询");
+        int n = selector.select();
+        System.out.println("n=" + n);
+        Thread.sleep(1000);
+    }
+
+代码如果是这样子的话，则代码会阻塞在
+
+    int n = selector.select();
+
+这一行，除非有channel事件就绪。但是如果在select()方法之前 调用selector.wakeup()的话，则会唤醒此次阻塞，而且如果在唤醒当即没有channel准备好的话，则返回值为0，即n=0.值得注意的是，selector.wakeup()只针对下一次调用的select()方法，即
+    
+    Selector selector = Selector.open();  
+    ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();  
+    serverSocketChannel.configureBlocking(false);  
+    serverSocketChannel.socket().bind(new InetSocketAddress(1234));  
+    serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);  
+    selector.wakeup(); //新添加代码
+    for(;;){
+        System.out.println("轮询");
+        int n = selector.select();
+        System.out.println("n=" + n);
+        Thread.sleep(1000);
+    }
+
+如果是这样子的话，只会打印一次
+
+    轮询
+    n=0
+
+如果代码如下
+
+    Selector selector = Selector.open();  
+    ServerSocketChannel serverSocketChannel=ServerSocketChannel.open();  
+    serverSocketChannel.configureBlocking(false);  
+    serverSocketChannel.socket().bind(new InetSocketAddress(1234));  
+    serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);     
+    for(;;){
+        selector.wakeup(); //新添加代码
+        System.out.println("轮询");
+        int n = selector.select();
+        System.out.println("n=" + n);
+        Thread.sleep(1000);
+    }
+
+则会打印
+
+    轮询
+    n=0
+    轮询
+    n=0
+    轮询
+    n=0
+    ...
+
+其实从效果来看，NioServerBoss的select(Selector selector) 和 AbstractNioSelector的select(Selector selector) 差别感觉不是很大，不知为何这么设计？
 
 如果长期select方法返回的是0，则需要调用rebuildSelector方法重建selector，netty给的阈值是1024；rebuildSelector的思想是重新new一个Selector，然后将旧的Selector的keys赋值给新的Selector，然后将新的Selector赋给AbstractNioSelector的selector属性。至于为什么是需要这样一种方法，netty源码注释上描述是 java NIO的一个bug，还没去深究，暂且不论。
 

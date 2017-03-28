@@ -145,7 +145,39 @@ ch.channel.finishConnect() 返回true，则表明网络连接成功，此时会�
 
 ##服务端accept
 
+服务端的Boss线程（NioServerBoss，相关请查看[Netty中的Boss和Worker](./bossAndWorker.md)）在轮询过程中，发现有连接上来的channel，则在 process(Selector selector) 下有如下逻辑
+    
+    for (;;) {
+        SocketChannel acceptedSocket = channel.socket.accept();
+        if (acceptedSocket == null) {
+            break;
+        }
+        registerAcceptedChannel(channel, acceptedSocket, thread);
+    }
 
+从ServerSocket上accept到SocketChannel，然后调用registerAcceptedChannel处理accept逻辑， registerAcceptedChannel方法如下
+
+    ChannelSink sink = parent.getPipeline().getSink();
+    ChannelPipeline pipeline =
+            parent.getConfig().getPipelineFactory().getPipeline();
+    NioWorker worker = parent.workerPool.nextWorker();
+    worker.register(new NioAcceptedSocketChannel(
+            parent.getFactory(), pipeline, parent, sink
+            , acceptedSocket,
+            worker, currentThread), null);
+
+从Worker池获取NioWorker，向NioWorker的taskQueue投递一个NioWorker的RegisterTask，Worker线程会从taskQueue中获取该任务去执行， NioWorker的RegisterTask主要完成的任务是：
+
+1.通知对应的future，接收客户端的连接任务已经完成
+
+2.设置此连接上来的channel为非阻塞。
+
+3.向NioWorker的多路复用器Selector注册此channel的读写事件。
+
+4.向整个系统通知有channel连接上来，以便有重写了acceptChannel的用户代码可以被回调（fire方法）
+
+
+至此，客户端连接服务端的流程全部分析完成。
 
 
 
