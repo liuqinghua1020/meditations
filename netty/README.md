@@ -14,6 +14,7 @@
 
 5.[Netty客户端连接](./nettyConnection.md)
 
-6.[Netty读](./nettyRead.md)
+6.[Netty写](./nettyWrite.md)
 
-7.[Netty读](./nettyWrite.md)
+7.[Netty读](./nettyRead.md)
+

@@ -6,9 +6,12 @@
 * [Netty系列](netty/README.md)
     - [Netty基础杂谈](netty/nettyBase.md)
     - [Netty服务器启动](netty/nettyBind.md)
+    - [Netty中的Boss和Worker](netty/bossAndWorker.md)
+    - [pipeline,channel和handler](netty/channelHandler.md)
     - [Netty客户端连接](netty/nettyConnection.md)
     - [Netty写](netty/nettyWrite.md)
     - [Netty读](netty/nettyRead.md)
-    - [Netty中的Boss和Worker](netty/bossAndWorker.md)
-    - [pipeline,channel和handler](netty/channelHandler.md)
+    
+   
+
 
