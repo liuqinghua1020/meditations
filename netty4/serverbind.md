@@ -34,7 +34,7 @@
 ```
 
 Netty 内部采用的是 Reactor 模型，服务端主流的用法是 主从Reactor多线程模型，大体框架如下图所示<br>
- ![reactor][./pic/reactor01.png]
+![reactor](./pic/reactor01.png)
 <br>
 
 对应上述代码，bossGroup主要是用于接受客户端连接（Accept），然后把 连接通道（Channel）分发给 workerGroup组来负责读写（write/read）。 

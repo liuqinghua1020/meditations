@@ -11,6 +11,8 @@
     - [Netty客户端连接](netty/nettyConnection.md)
     - [Netty写](netty/nettyWrite.md)
     - [Netty读](netty/nettyRead.md)
+* [Netty4系列](netty4/README.md)
+    - [Netty服务端端口绑定](netty4/serverbind.md)
 * [一个证书验证的错误分析](certverifySignature.md)
     
    
