@@ -4,7 +4,7 @@
 
 1.[Netty服务端端口绑定](./serverbind.md)
 
-2.[Netty服务端接受连接](./nettyAccept.md)
+2.[Netty服务端接收连接](./nettyAccept.md)
 
 3.[Netty服务端读](./nettyRead.md)
 
