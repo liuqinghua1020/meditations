@@ -17,3 +17,5 @@
 7.[Netty编码](./nettyCode.md)
 
 本文所讲述的都会是以Netty NIO为例子，不涉及 OIO 等。
+
+参考自 [芋道源码](http://svip.iocoder.cn/categories/Netty/)
