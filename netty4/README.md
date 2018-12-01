@@ -6,15 +6,17 @@
 
 2.[Netty服务端接收连接](./nettyAccept.md)
 
-3.[Netty服务端读](./nettyRead.md)
+3.[Netty pipeline](./pipeline.md)
 
-4.[Netty服务端写](./nettyWrite.md)
+4.[Netty服务端读](./nettyRead.md)
 
-5.[Netty内存管理](./nettyMemory.md)
+5.[Netty服务端写](./nettyWrite.md)
 
-6.[Netty解码](./nettyDecode.md)
+6.[Netty内存管理](./nettyMemory.md)
 
-7.[Netty编码](./nettyCode.md)
+7.[Netty解码](./nettyDecode.md)
+
+8.[Netty编码](./nettyCode.md)
 
 本文所讲述的都会是以Netty NIO为例子，不涉及 OIO 等。
 
