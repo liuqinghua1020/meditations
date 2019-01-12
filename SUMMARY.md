@@ -16,6 +16,7 @@
     - [Netty服务端接收连接](netty4/nettyAccept.md)
     - [Netty Pipeline简述](netty4/pipeline.md)
     - [Netty服务端读](netty4/nettyRead.md)
+    - [Netty服务端读](netty4/nettyWrite.md)
 * [一个证书验证的错误分析](certverifySignature.md)
     
    
