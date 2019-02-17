@@ -17,6 +17,7 @@
     - [Netty Pipeline简述](netty4/pipeline.md)
     - [Netty服务端读](netty4/nettyRead.md)
     - [Netty服务端写](netty4/nettyWrite.md)
+    - [Netty内存管理](netty4/nettyMemory.md)
 * [一个证书验证的错误分析](certverifySignature.md)
     
    
