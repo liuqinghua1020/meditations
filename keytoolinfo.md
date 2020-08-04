@@ -20,13 +20,13 @@
 
 ### 产生证书请求
 
-* keytool -certreq -keystore C:\netca\sign.jks -alias server -file C:\netca\certreq.txt
+* keytool -certreq -keystore C:\sign.jks -alias server -file C:\certreq.txt
 
  
 
 ### 证书导入
 
-* keytool -import -keystore  C:\netca\env.jks -file C:\netca\env.cer  -alias env
+* keytool -import -keystore  C:\env.jks -file C:\env.cer  -alias env
 
  
 
